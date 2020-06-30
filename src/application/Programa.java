@@ -22,25 +22,22 @@ public class Programa {
 		double saldo = sc.nextDouble();
 		System.out.print("Limite de saque: ");
 		double limiteSaque = sc.nextDouble();
-		
+
 		Conta ct = new Conta(numConta, titular, saldo, limiteSaque);
-		
+
 		System.out.println("Digite o valor para saque: ");
 		double valor = sc.nextDouble();
-		
-		if (valor > ct.getLimiteSaque()) {
-			System.out.println("O valor excede o limite de Saque");
-		}
-		else if (valor > ct.getSaldo()) {
-			System.out.println("Não tem saldo suficiente");
-		}
-		else {
-			ct.saque(valor);
-			System.out.println("Saldo atual R$ " + ct.getSaldo());
-			
-		}
-		
 
+		String erro = ct.saque(valor);
+		
+		if (erro !=null) {
+			System.out.println(erro);
+		}
+				
+		System.out.println(ct);
+						
+		
+		sc.close();
 	}
 
 }

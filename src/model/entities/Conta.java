@@ -1,7 +1,7 @@
 package model.entities;
 
 public class Conta {
-	
+
 	private Integer numConta;
 	private String titular;
 	private Double saldo;
@@ -41,14 +41,28 @@ public class Conta {
 	public void setLimiteSaque(Double limiteSaque) {
 		this.limiteSaque = limiteSaque;
 	}
-	
+
 	public void deposito(double valor) {
 		saldo = saldo + valor;
 	}
-	public void saque(double valor) {
+
+	public String saque(double valor) {
+		if (valor > getLimiteSaque()) {
+			return "O valor excede o limite de Saque";
+		} 
+		else if (valor > getSaldo()) {
+			return "Não tem saldo suficiente";
+		} 
 		
 		saldo = saldo - valor;
+		
+		return null;
+		
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Saldo atual R$ " + getSaldo();
+	}
 
 }
