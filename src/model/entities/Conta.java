@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.exceptions.ExcecaoDominio;
+
 public class Conta {
 
 	private Integer numConta;
@@ -43,20 +45,19 @@ public class Conta {
 	}
 
 	public void deposito(double valor) {
-		saldo = saldo + valor;
+		saldo += valor;
 	}
 
-	public String saque(double valor) {
+	public void saque(double valor) throws ExcecaoDominio {
 		if (valor > getLimiteSaque()) {
-			return "O valor excede o limite de Saque";
+			throw new ExcecaoDominio("O valor excede o limite de Saque");
 		} 
 		else if (valor > getSaldo()) {
-			return "Não tem saldo suficiente";
+			throw new ExcecaoDominio("Não tem saldo suficiente");
 		} 
 		
-		saldo = saldo - valor;
+		saldo -= valor;
 		
-		return null;
 		
 	}
 
